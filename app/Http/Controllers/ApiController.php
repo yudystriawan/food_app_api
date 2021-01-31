@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\APiResponser;
+use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    use APiResponser;
+    use ApiResponser;
 }
