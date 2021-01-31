@@ -15,29 +15,11 @@ class RestoController extends Controller
      */
     public function index()
     {
-        //
+        $restos = Resto::has('food')->get();
+
+        return response()->json(['data' => $restos], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -47,40 +29,7 @@ class RestoController extends Controller
      */
     public function show(Resto $resto)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Resto  $resto
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Resto $resto)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Resto  $resto
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Resto $resto)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Resto  $resto
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Resto $resto)
-    {
-        //
+        $result = $resto->has('food')->findOrFail($resto->id);
+        return response()->json(['data' => $result], 200);
     }
 }
