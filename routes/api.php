@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FoodController;
 use App\Http\Controllers\Api\RestoController;
 use App\Http\Controllers\Api\TransactionController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,5 @@ Route::resource('foods', FoodController::class);
 Route::resource('transactions', TransactionController::class)->only(['index', 'show']);
 
 Route::resource('categories', CategoryController::class);
+
+Route::resource('users', UserController::class)->except(['create'. 'edit']);
