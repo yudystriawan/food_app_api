@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\FoodController;
 use App\Http\Controllers\Api\RestoController;
 use App\Http\Controllers\Api\TransactionController;
@@ -24,6 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('restos', RestoController::class)->only(['index', 'show']);
+
+Route::resource('customers', CustomerController::class)->only(['index', 'show']);
 
 Route::resource('foods', FoodController::class);
 
