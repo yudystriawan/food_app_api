@@ -28,6 +28,12 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'verified' => $this->faker->randomElement([User::VERIFIED_USER, User::UNVERIFIED_USER]),
+            'admin' => $this->faker->randomElement([User::ADMIN_USER, User::REGULAR_USER]),
+            'address' => $this->faker->address,
+            'house_number'=> $this->faker->numberBetween(0,100),
+            'phone_number'=> $this->faker->phoneNumber,
+            'city'=>$this->faker->city,
         ];
     }
 }
