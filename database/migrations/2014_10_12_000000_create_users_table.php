@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +23,13 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
+
+            $table->text('address')->nullable();
+            $table->string('house_number')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('city')->nullable();
+            $table->string('verified')->default(User::UNVERIFIED_USER);
+            $table->string('admin')->default(User::REGULAR_USER);
             $table->timestamps();
         });
     }
