@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Actions\Fortify\PasswordValidationRules;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends ApiController
 {
     use PasswordValidationRules;
     /**
@@ -19,7 +20,7 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        return response()->json(['data' => $users], 200);
+        return $this->showAll($users);
     }
 
     /**
@@ -43,7 +44,7 @@ class UserController extends Controller
 
         $user = User::create($data);
 
-        return response()->json(['data' => $user], 201);
+        return $this->showOne($user, 201);
     }
 
     /**
@@ -54,7 +55,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user);
     }
 
     /**
@@ -101,12 +102,12 @@ class UserController extends Controller
         }
 
         if (!$user->isDirty()) {
-            return response()->json(['error' => 'You need to specify a different value to update'], 420);
+            return $this->errorResponse('You need to specify a different value to update', 420);
         }
 
         $user->save();
 
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user);
     }
 
     /**
@@ -119,6 +120,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user);
     }
 }

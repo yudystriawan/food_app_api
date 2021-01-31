@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
 use App\Models\Resto;
 use Illuminate\Http\Request;
 
-class RestoController extends Controller
+class RestoController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +18,7 @@ class RestoController extends Controller
     {
         $restos = Resto::has('food')->get();
 
-        return response()->json(['data' => $restos], 200);
+        return $this->showAll($restos);
     }
 
 
@@ -30,6 +31,7 @@ class RestoController extends Controller
     public function show(Resto $resto)
     {
         $result = $resto->has('food')->findOrFail($resto->id);
-        return response()->json(['data' => $result], 200);
+        
+        return $this->showOne($result);
     }
 }

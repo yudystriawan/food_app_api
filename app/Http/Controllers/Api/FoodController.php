@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
 use App\Models\Food;
 use Illuminate\Http\Request;
 
-class FoodController extends Controller
+class FoodController extends ApiController
 {
     /**
      * Display a listing of the resource.
