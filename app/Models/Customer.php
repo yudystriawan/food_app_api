@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Resto extends User
+class Customer extends User
 {
     use HasFactory;
 
-    public function foods()
+    public function transactions()
     {
-        return $this->hasMany(Food::class);
+        return $this->hasMany(Transaction::class);
     }
-
 }

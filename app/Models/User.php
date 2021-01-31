@@ -18,6 +18,12 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    const VERIFIED_USER = '1';
+    const UNVERIFIED_USER = '0';
+
+    const ADMIN_USER = 'true';
+    Const REGULAR_USER = 'false';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,6 +33,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'house_number',
+        'phone_number',
+        'city',
+        'verified',
+        'admin',
     ];
 
     /**
@@ -58,4 +70,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function isVerified()
+    {
+        return $this->verified == User::VERIFIED_USER;
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin == User::ADMIN_USER;
+    }
 }
