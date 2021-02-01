@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->integer('quantity')->unsigned();
             $table->integer('total')->unsigned();

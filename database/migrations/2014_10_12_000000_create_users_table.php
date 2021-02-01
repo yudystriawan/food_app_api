@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->string('city')->nullable();
             $table->string('verified')->default(User::UNVERIFIED_USER);
             $table->string('admin')->default(User::REGULAR_USER);
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
