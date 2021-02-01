@@ -4,9 +4,14 @@ namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
 use Exception;
+use Http\Client\Exception\HttpException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -63,6 +68,35 @@ class Handler extends ExceptionHandler
     
             return $this->errorResponse("The specified URL cannot be found", 404);
 
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return $this->errorResponse('Unauthenticated', 401);
+        }
+
+        if ($exception instanceof AuthorizationException) {
+            return $this->errorResponse($exception->getMessage(), 403);
+        }
+
+        if ($exception instanceof MethodNotAllowedHttpException) {
+            return $this->errorResponse('The specified method for the request is invalid', 404);
+        }
+
+        if ($exception instanceof HttpException) {
+            return $this->errorResponse($exception->getMessage(), $exception->getCode());
+        }
+
+        if ($exception instanceof QueryException) {
+            $errorCode = $exception->errorInfo[1];
+
+            if ($errorCode == 1451) {
+                return $this->errorResponse('Cannot remove this resource permanently. It is related with any other resource.', 409);
+            }
+        }
+
+        if (config('app.debug'))
+        {
+            return $this->prepareResponse($request, $exception);
         }
 
         return $this->errorResponse('Something went wrong', 500);
