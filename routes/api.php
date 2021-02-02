@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\Category\CategoryFoodController;
+use App\Http\Controllers\Api\Category\CategoryController;
+use App\Http\Controllers\Api\Category\CategoryCustomerController;
+use App\Http\Controllers\Api\Category\CategoryRestoController;
+use App\Http\Controllers\Api\Category\CategoryTransactionController;
 use App\Http\Controllers\Api\Customer\CustomerCategoryController;
 use App\Http\Controllers\Api\Customer\CustomerTransactionController;
 use App\Http\Controllers\Api\Customer\CustomerController;
@@ -45,5 +49,9 @@ Route::resource('transactions.categories', TransactionCategoryController::class)
 Route::resource('transactions.restos', TransactionRestoController::class)->only(['index']);
 
 Route::resource('categories', CategoryController::class)->only(['index', 'show']);
+Route::resource('categories.foods', CategoryFoodController::class)->only(['index']);
+Route::resource('categories.restos', CategoryRestoController::class)->only(['index']);
+Route::resource('categories.transactions', CategoryTransactionController::class)->only(['index']);
+Route::resource('categories.customers', CategoryCustomerController::class)->only(['index']);
 
 Route::resource('users', UserController::class)->except(['create'. 'edit']);
