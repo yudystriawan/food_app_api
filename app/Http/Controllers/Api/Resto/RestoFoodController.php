@@ -8,6 +8,7 @@ use App\Models\Food;
 use App\Models\Resto;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RestoFoodController extends ApiController
@@ -44,7 +45,7 @@ class RestoFoodController extends ApiController
 
         $data['status'] = Food::UNAVAILABLE;
         $data['rate'] = 0.0;
-        $data['image'] = '1.jpg';
+        $data['image'] = $request->image->store('assets/food', 'public');
         $data['resto_id'] = $resto->id;
 
         $food = Food::create($data);
@@ -74,12 +75,15 @@ class RestoFoodController extends ApiController
             'description',
             'ingredients',
             'price',
-            'status',
-            'image',
         ]));
 
         if ($food->isClean()) {
             return $this->errorResponse('You need to specify a different value to update', 420);
+        }
+
+        if ($request->hasFile('image')) {
+            Storage::disk('public')->delete($food->image);
+            $food->image = $request->image->store('assets/food', 'public');
         }
 
         $food->save();
@@ -97,7 +101,10 @@ class RestoFoodController extends ApiController
     {
         $this->checkResto($resto, $food);
 
+        // dd($food->image);
+
         $food->delete();
+        Storage::disk('public')->delete($food->image);
 
         return $this->showOne($food);
     }
