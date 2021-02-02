@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Resto;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class RestoController extends ApiController
      */
     public function index()
     {
-        $restos = Resto::has('food')->get();
+        $restos = Resto::has('foods')->get();
 
         return $this->showAll($restos);
     }
@@ -30,7 +30,7 @@ class RestoController extends ApiController
      */
     public function show(Resto $resto)
     {
-        $result = $resto->has('food')->findOrFail($resto->id);
+        $result = $resto->has('foods')->findOrFail($resto->id);
         
         return $this->showOne($result);
     }

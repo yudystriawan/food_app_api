@@ -9,7 +9,7 @@ class Resto extends User
 {
     use HasFactory;
 
-    public function food()
+    public function foods()
     {
         return $this->hasMany(Food::class);
     }

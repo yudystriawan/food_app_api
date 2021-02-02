@@ -11,7 +11,11 @@ use App\Http\Controllers\Api\Customer\CustomerController;
 use App\Http\Controllers\Api\Customer\CustomerFoodController;
 use App\Http\Controllers\Api\Customer\CustomerRestoController;
 use App\Http\Controllers\Api\FoodController;
-use App\Http\Controllers\Api\RestoController;
+use App\Http\Controllers\Api\Resto\RestoCategoryController;
+use App\Http\Controllers\Api\Resto\RestoTransactionController;
+use App\Http\Controllers\Api\Resto\RestoController;
+use App\Http\Controllers\Api\Resto\RestoCustomerController;
+use App\Http\Controllers\Api\Resto\RestoFoodController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\Transaction\TransactionCategoryController;
 use App\Http\Controllers\Api\Transaction\TransactionController;
@@ -35,6 +39,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('restos', RestoController::class)->only(['index', 'show']);
+Route::resource('restos.transactions', RestoTransactionController::class)->only(['index']);
+Route::resource('restos.categories', RestoCategoryController::class)->only(['index']);
+Route::resource('restos.customers', RestoCustomerController::class)->only(['index']);
+Route::resource('restos.foods', RestoFoodController::class)->except(['create', 'show', 'edit']);
 
 Route::resource('customers', CustomerController::class)->only(['index', 'show']);
 Route::resource('customers.transactions', CustomerTransactionController::class)->only(['index']);
