@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\Customer\CustomerCategoryController;
+use App\Http\Controllers\Api\Customer\CustomerTransactionController;
+use App\Http\Controllers\Api\Customer\CustomerController;
+use App\Http\Controllers\Api\Customer\CustomerFoodController;
+use App\Http\Controllers\Api\Customer\CustomerRestoController;
 use App\Http\Controllers\Api\FoodController;
 use App\Http\Controllers\Api\RestoController;
 use App\Http\Controllers\Api\UserController;
@@ -29,6 +33,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('restos', RestoController::class)->only(['index', 'show']);
 
 Route::resource('customers', CustomerController::class)->only(['index', 'show']);
+Route::resource('customers.transactions', CustomerTransactionController::class)->only(['index']);
+Route::resource('customers.foods', CustomerFoodController::class)->only(['index']);
+Route::resource('customers.restos', CustomerRestoController::class)->only(['index']);
+Route::resource('customers.categories', CustomerCategoryController::class)->only(['index']);
 
 Route::resource('foods', FoodController::class)->only(['index', 'show']);
 
