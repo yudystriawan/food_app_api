@@ -28,7 +28,7 @@ Route::resource('restos', RestoController::class)->only(['index', 'show']);
 
 Route::resource('customers', CustomerController::class)->only(['index', 'show']);
 
-Route::resource('foods', FoodController::class);
+Route::resource('foods', FoodController::class)->only(['index', 'show']);
 
 Route::resource('transactions', TransactionController::class)->only(['index', 'show']);
 
