@@ -24,6 +24,10 @@ class Food extends Model
         'resto_id',
     ];
 
+    protected $hidden = [
+        'pivot'
+    ];
+
     public function isAvailable()
     {
         return $this->status == Food::AVAILABLE;
