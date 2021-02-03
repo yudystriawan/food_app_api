@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Transformers\TransactionTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,8 @@ class Transaction extends Model
     const CANCELED = 'canceled';
     const DELIVERED = 'delivered';
     const ON_DELIVERY = 'on delivery';
+
+    public $transformer = TransactionTransformer::class;
 
     protected $fillable = [
         'quantity',

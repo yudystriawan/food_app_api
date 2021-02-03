@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Transformers\FoodTransformer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,6 +13,8 @@ class Food extends Model
 
     const AVAILABLE = 'available';
     const UNAVAILABLE = 'unavailable';
+
+    public $transformer = FoodTransformer::class;
 
     protected $fillable = [
         'name',

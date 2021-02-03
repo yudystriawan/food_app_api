@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Transformers\UserTransformer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
     const ADMIN_USER = 'true';
     Const REGULAR_USER = 'false';
 
+    public $transformer = UserTransformer::class;
     protected $table = 'users';
     /**
      * The attributes that are mass assignable.
