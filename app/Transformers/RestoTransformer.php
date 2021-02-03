@@ -47,4 +47,19 @@ class RestoTransformer extends TransformerAbstract
             'deletedDate' => isset($resto->deleted_at) ? (string) $resto->deleted_at : null,
         ];
     }
+
+    public static function originalAttribute($index){
+        $attributes = [
+            'restoName' => 'name',
+            'isVerified' => 'verified',
+            'houseNumber' => 'house_number',
+            'phoneNumber' => 'phone_number',
+            'image' => 'profile_photo_url',
+            'creationDate' => 'created_at',
+            'lastChange' => 'updated_at',
+            'deletedDate' => 'deleted_at',
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

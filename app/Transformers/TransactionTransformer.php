@@ -44,4 +44,16 @@ class TransactionTransformer extends TransformerAbstract
             'deletedDate' => isset($transaction->deleted_at) ? (string) $transaction->deleted_at : null,
         ];
     }
+
+    public static function originalAttribute($index){
+        $attributes = [
+            'customer' => 'customer_id',
+            'food' => 'food_id',
+            'creationDate' => 'created_at',
+            'lastChange' => 'updated_at',
+            'deletedDate' => 'deleted_at',
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }
