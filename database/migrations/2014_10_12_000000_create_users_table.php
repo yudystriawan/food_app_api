@@ -16,6 +16,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
+            $table->softDeletes();
+            
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -28,10 +31,8 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('city')->nullable();
             $table->string('verified')->default(User::UNVERIFIED_USER);
+            $table->string('verification_token')->nullable();
             $table->string('admin')->default(User::REGULAR_USER);
-
-            $table->softDeletes();
-            $table->timestamps();
         });
     }
 

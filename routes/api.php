@@ -71,3 +71,5 @@ Route::resource('categories.transactions', CategoryTransactionController::class)
 Route::resource('categories.customers', CategoryCustomerController::class)->only(['index']);
 
 Route::resource('users', UserController::class)->except(['create'. 'edit']);
+Route::get('users/verify/{token}', [UserController::class, 'verify'])->name('users.verify');
+Route::get('users/{user}/resend', [UserController::class, 'resend'])->name('users.resend');

@@ -28,6 +28,12 @@ class DatabaseSeeder extends Seeder
         Transaction::truncate();
         DB::table('category_food')->truncate();
 
+        // To remove event listener from provider like send email verification
+        User::flushEventListeners();
+        Category::flushEventListeners();
+        Food::flushEventListeners();
+        Transaction::flushEventListeners();
+
         $userQuantity = 1000;
         $categoryQuantity = 30;
         $foodQuantity = 1000;
