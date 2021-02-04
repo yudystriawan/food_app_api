@@ -37,7 +37,7 @@ class UserTransformer extends TransformerAbstract
             'name' => $user->name,
             'email' => $user->email,
             'isVerified' => (int) $user->verified,
-            'isAdmin' => ($user->admin === true),
+            'isAdmin' => ($user->admin === 'true'),
             'picture' => $user->profile_photo_url,
             'creationDate' => (string) $user->created_at,
             'lastChange' => (string) $user->updated_at,
