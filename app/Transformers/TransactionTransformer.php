@@ -54,6 +54,6 @@ class TransactionTransformer extends TransformerAbstract
             'deletedDate' => 'deleted_at',
         ];
 
-        return isset($attributes[$index]) ? $attributes[$index] : null;
+        return isset($attributes[$index]) ? $attributes[$index] : $index;
     }
 }
